@@ -3,17 +3,25 @@
 #include"HuffmanNode.h"
 class HuffmanTree
 {
-
-public:
-	HuffmanTree();
-	~HuffmanTree();
+private:
+	HuffmanNode* root;
+public: 
+	HuffmanTree()
+	{
+		root = nullptr;
+	}
+	~HuffmanTree()
+	{
+		delete root;
+	}
 	void encode(string sourceFileName, string destFileName);
-	void decode(string sourceFileName, string destFileName);
+	//void decode(string sourceFileName, string destFileName);
 	int* buildFrequencyTable(string text);
-	void buildTree(int n, string letters, string tree);
+	//void buildTree(int n, string letters, string tree);
 	void buildTree(int * frequencyTable);
-	void buildCodedTabe();
-	void encode(char letter, string * codedTable);
-	void deleteTree();
+	string * buildCodedTabe();
+	//void encode(char letter, string * codedTable);
+	//void deleteTree();
+	void codec(HuffmanNode* Node, string a, string* & table);
 };
 

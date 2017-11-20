@@ -1,18 +1,9 @@
 #include "HuffmanTree.h"
 
-
-
-HuffmanTree::HuffmanTree()
-{
-}
-
-
-HuffmanTree::~HuffmanTree()
-{
-}
 void HuffmanTree::encode(string sourceFileName, string destFileName)
 {
-	int * table;
+	int * freqTable;
+	string * codTable;
 	stringstream strStream;
 	ifstream inFile;
 	string str;
@@ -24,13 +15,14 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	}
 	strStream << inFile.rdbuf();
 	str = strStream.str();
-	table = buildFrequencyTable(str);
-	buildTree(table);
+	freqTable = buildFrequencyTable(str);
+	buildTree(freqTable);
+	codTable = buildCodedTabe();
 
 }
 int* HuffmanTree::buildFrequencyTable(string text)
 {
-	int* table = new int[256];
+	int *table = new int[256];
 	for (int i = 0; i < 256; i++)
 	{
 		table[i] = 0;
@@ -38,13 +30,13 @@ int* HuffmanTree::buildFrequencyTable(string text)
 	for (int i = 0; i < text.length(); i++)
 	{
 		table[(int)text[i] - 1]++;
+		cout << (int)text[i] - 1 << "	" << table[(int)text[i] - 1] << endl;
 	}
 	return table;
 }
 
 void HuffmanTree::buildTree(int * frequencyTable)
 {
-	char a;
 	priority_queue<HuffmanNode*, vector<HuffmanNode*>, compareNode> pQueue;
 	for (int i = 0; i < 256; i++)
 	{
@@ -53,7 +45,46 @@ void HuffmanTree::buildTree(int * frequencyTable)
 			pQueue.push(new HuffmanNode((char)(i + 1), frequencyTable[i]));
 		}
 	}
+	HuffmanNode* Node;
+	while (pQueue.size() != 1)
+	{
+		Node = new HuffmanNode();
+		Node->setpointerL(pQueue.top());
+		int f = pQueue.top()->getFrequency();
+		pQueue.pop();
+		f += pQueue.top()->getFrequency();
+		Node->setFrequency(f);
+		Node->setpointerR(pQueue.top());
+		pQueue.pop();
+		pQueue.push(Node);
+		cout << pQueue.top()->getFrequency();
+	}
+	root = pQueue.top();
+}
 
-	
+string* HuffmanTree::buildCodedTabe()
+{
+	string* table = new string[256];
+	for (int i = 0; i < 256; i++)
+	{
+		table[i] = "";
+	}
+	codec(root,"", table);
+	return table;
+}
+
+void HuffmanTree::codec(HuffmanNode* Node, string a, string* & table)
+{
+	if (a==""&&Node->getpointerR()==nullptr)
+	{
+		table[(int)Node->getStr() - 1] = "0";
+		return;
+	}
+	if (Node->getpointerR()==nullptr)
+	{
+		table[(int)Node->getStr() - 1] = a;
+	}
+	return codec(Node->getpointerL(), a += "0", table);
+	return codec(Node->getpointerR(), a += "1", table);
 }
 
