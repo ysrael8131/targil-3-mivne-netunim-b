@@ -18,7 +18,7 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	freqTable = buildFrequencyTable(str);
 	buildTree(freqTable);
 	codTable = buildCodedTabe();
-
+	cout << codTable[99] << endl;
 }
 int* HuffmanTree::buildFrequencyTable(string text)
 {
@@ -30,7 +30,6 @@ int* HuffmanTree::buildFrequencyTable(string text)
 	for (int i = 0; i < text.length(); i++)
 	{
 		table[(int)text[i] - 1]++;
-		cout << (int)text[i] - 1 << "	" << table[(int)text[i] - 1] << endl;
 	}
 	return table;
 }
@@ -58,8 +57,8 @@ void HuffmanTree::buildTree(int * frequencyTable)
 		pQueue.pop();
 		pQueue.push(Node);
 		cout << pQueue.top()->getFrequency();
+		root = Node;
 	}
-	root = pQueue.top();
 }
 
 string* HuffmanTree::buildCodedTabe()
@@ -83,8 +82,10 @@ void HuffmanTree::codec(HuffmanNode* Node, string a, string* & table)
 	if (Node->getpointerR()==nullptr)
 	{
 		table[(int)Node->getStr() - 1] = a;
+		cout << (int)Node->getStr() - 1<<"	"<< table[(int)Node->getStr() - 1] << endl;
+		return;
 	}
-	return codec(Node->getpointerL(), a += "0", table);
-	return codec(Node->getpointerR(), a += "1", table);
+	codec(Node->getpointerL(), a += "0", table);
+	codec(Node->getpointerR(), a += "1", table);
 }
 
