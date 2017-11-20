@@ -1,5 +1,5 @@
 #include "HuffmanTree.h"
-//gfsnhndsghj
+
 void HuffmanTree::encode(string sourceFileName, string destFileName)
 {
 	int * freqTable;
