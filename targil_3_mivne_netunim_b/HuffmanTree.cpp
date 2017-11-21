@@ -17,9 +17,52 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	str = strStream.str();
 	freqTable = buildFrequencyTable(str);
 	buildTree(freqTable);
-	codTable = buildCodedTabe();
-	cout << codTable[99] << endl;
+
+	string treeStruct = "";
+	string chars = "";
+	codTable = buildCodedTabe(treeStruct, chars);
+	cout << str << endl;
+	cout << "Huffman code:" << endl;
+	
+	
+	for (int i = 0; i < 256; i++)
+	{
+		if (codTable[i] != "")
+		{
+			cout << (char)(i + 1) << ":	" <<  codTable[i] <<endl;
+			for (int j = 0; j < freqTable[i]; j++)
+			{
+				str.replace(str.find((char)(i + 1)), 1, codTable[i]);
+			}
+		}
+	}
+	double x;
+	int codLen;
+	x = log2(chars.size());
+	codLen = (x >(int)x) ? x + 1 : x;
+	cout << "In the fixed - length code, the number of bits needed per character: " << codLen << endl;
+	
+	cout << "Encoding in fixed-length code requires " <<codLen*str.size() << " bits." << endl;
+
+	cout << "Encoding in Huffman code requires " <<str.size()  << " bits." << endl;
+	
+	cout << "The encoded string is:" << endl;
+	
+	ofstream outFile;
+	outFile.open(destFileName);
+	if (!outFile.good())
+	{
+		cout << "Cannot open file\n";
+		return;
+	}
+	outFile << chars.size() << '\n'<<chars<<'\n'<<treeStruct<<'\n'<<str;
+	cout << chars.size() << endl;
+	cout << chars << endl;
+	cout << treeStruct << endl;
+	cout << str << endl;
+	outFile.close();
 }
+
 int* HuffmanTree::buildFrequencyTable(string text)
 {
 	int *table = new int[256];
@@ -56,36 +99,39 @@ void HuffmanTree::buildTree(int * frequencyTable)
 		Node->setpointerR(pQueue.top());
 		pQueue.pop();
 		pQueue.push(Node);
-		cout << pQueue.top()->getFrequency();
 		root = Node;
 	}
 }
 
-string* HuffmanTree::buildCodedTabe()
+string* HuffmanTree::buildCodedTabe(string & treeStruct, string & chars)
 {
 	string* table = new string[256];
 	for (int i = 0; i < 256; i++)
 	{
 		table[i] = "";
 	}
-	codec(root,"", table);
+
+	codec(root, "", table, treeStruct, chars);
+	treeStruct += "1";
 	return table;
 }
 
-void HuffmanTree::codec(HuffmanNode* Node, string a, string* & table)
+void HuffmanTree::codec(HuffmanNode* Node, string cod, string* & table, string & treeStruct, string & chars)
 {
-	if (a==""&&Node->getpointerR()==nullptr)
+	if (cod == ""&&Node->getpointerR() == nullptr)
 	{
-		table[(int)Node->getStr() - 1] = "0";
+		table[(int)Node->getStr() - 1] = "1";
+		chars += Node->getStr();
 		return;
 	}
-	if (Node->getpointerR()==nullptr)
+	if (Node->getpointerR() == nullptr)
 	{
-		table[(int)Node->getStr() - 1] = a;
-		cout << (int)Node->getStr() - 1<<"	"<< table[(int)Node->getStr() - 1] << endl;
+		table[(int)Node->getStr() - 1] = cod;
+		chars += Node->getStr();
 		return;
 	}
-	codec(Node->getpointerL(), a += "0", table);
-	codec(Node->getpointerR(), a += "1", table);
+	string cod1 = cod;
+	codec(Node->getpointerL(), cod += "0", table, treeStruct += "0", chars);
+	codec(Node->getpointerR(), cod1 += "1", table, treeStruct += "1", chars);
 }
 

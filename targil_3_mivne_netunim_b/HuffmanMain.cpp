@@ -1,10 +1,4 @@
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <queue>
 #include <list>
-#include <string>
-#include <cmath>
 #include "HuffmanTree.h"
 using namespace std;
 
@@ -22,8 +16,8 @@ int main()
 	//frequencyTable *table = new frequencyTable[256];
 	//string kidud[256];
 	//string binaryCode;
-	//double x;
-	//int codeLen, BT1, BT2 = 0;
+	double x;
+	int codeLen, BT1, BT2 = 0;
 	HuffmanTree * tree = new HuffmanTree();
 	//priorityQueueExapmple();
 
@@ -42,6 +36,7 @@ int main()
 			cout << "Enter a name for output file" << endl;
 			cin >> outputname;
 			tree->encode(inputname, outputname);
+			break;
 		//	cout << text << endl;
 
 		//	table = tree->buildFrequencyTable(text, size); // Build frequency table
@@ -63,7 +58,7 @@ int main()
 		//		}
 
 		//	x = log10(size) / log10(2);
-		//	codeLen = (x >(int)x) ? x + 1 : x;
+			//codeLen = (x >(int)x) ? x + 1 : x;
 		//	BT1 = codeLen * text.length();
 		//	cout << "B(T) not compressed = " << BT1 << endl;
 		//	cout << "B(T) compressed = " << BT2 << endl;

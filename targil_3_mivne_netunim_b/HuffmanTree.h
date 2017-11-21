@@ -19,9 +19,9 @@ public:
 	int* buildFrequencyTable(string text);
 	//void buildTree(int n, string letters, string tree);
 	void buildTree(int * frequencyTable);
-	string * buildCodedTabe();
+	string * buildCodedTabe(string & treeStruct, string & chars);
 	//void encode(char letter, string * codedTable);
 	//void deleteTree();
-	void codec(HuffmanNode* Node, string a, string* & table);
+	void codec(HuffmanNode* Node, string cod, string* & table,string & treeStruct,string & chars);
 };
 
