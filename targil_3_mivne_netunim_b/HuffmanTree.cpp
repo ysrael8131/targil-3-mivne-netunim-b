@@ -2,6 +2,7 @@
 
 void HuffmanTree::encode(string sourceFileName, string destFileName)
 {
+	הה
 	int * freqTable;
 	string * codTable;
 	stringstream strStream;
