@@ -5,6 +5,7 @@
 #include<algorithm>
 #include<vector>
 #include<queue>
+#include <cmath>
 using namespace std;
 class HuffmanNode
 {

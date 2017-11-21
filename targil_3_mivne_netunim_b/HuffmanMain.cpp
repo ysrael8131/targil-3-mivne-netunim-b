@@ -1,10 +1,4 @@
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <queue>
 #include <list>
-#include <string>
-#include <cmath>
 #include "HuffmanTree.h"
 using namespace std;
 
@@ -22,8 +16,8 @@ int main()
 	//frequencyTable *table = new frequencyTable[256];
 	//string kidud[256];
 	//string binaryCode;
-	//double x;
-	//int codeLen, BT1, BT2 = 0;
+	double x;
+	int codeLen, BT1, BT2 = 0;
 	HuffmanTree * tree = new HuffmanTree();
 	//priorityQueueExapmple();
 
@@ -41,69 +35,69 @@ int main()
 			cin >> inputname;
 			cout << "Enter a name for output file" << endl;
 			cin >> outputname;
-			//tree->encode(inputname, outputname);
-			tree->decode(inputname, outputname);
-			//	cout << text << endl;
+			tree->encode(inputname, outputname);
+			break;
+		//	cout << text << endl;
 
-			//	table = tree->buildFrequencyTable(text, size); // Build frequency table
+		//	table = tree->buildFrequencyTable(text, size); // Build frequency table
 
-			//	cout << "Frequency table. size = " << size << endl;
-			//	for (int i = 0; i < size; i++)
-			//		cout << table[i].ltr << " " << table[i].frq << endl;
+		//	cout << "Frequency table. size = " << size << endl;
+		//	for (int i = 0; i < size; i++)
+		//		cout << table[i].ltr << " " << table[i].frq << endl;
 
-			//	tree->buildTree(table, size);  // Build Huffman tree
+		//	tree->buildTree(table, size);  // Build Huffman tree
 
-			//	tree->buildTableCode(kidud, 256);  // Build code for each character
-			//	for (int i = 0; i < 256; i++)
-			//		if (kidud[i] != "")
-			//		{
-			//			int j = 0;
-			//			cout << "The code of letter " << (char)i << " is " << kidud[i] << endl;
-			//			for (; j < size && (table[j].ltr[0] != (char)i); j++);
-			//			BT2 += table[j].frq * kidud[i].length();
-			//		}
+		//	tree->buildTableCode(kidud, 256);  // Build code for each character
+		//	for (int i = 0; i < 256; i++)
+		//		if (kidud[i] != "")
+		//		{
+		//			int j = 0;
+		//			cout << "The code of letter " << (char)i << " is " << kidud[i] << endl;
+		//			for (; j < size && (table[j].ltr[0] != (char)i); j++);
+		//			BT2 += table[j].frq * kidud[i].length();
+		//		}
 
-			//	x = log10(size) / log10(2);
-			//	codeLen = (x >(int)x) ? x + 1 : x;
-			//	BT1 = codeLen * text.length();
-			//	cout << "B(T) not compressed = " << BT1 << endl;
-			//	cout << "B(T) compressed = " << BT2 << endl;
-			//	cout << "Huffman saving % = " << (double)(BT1 - BT2) / BT1*100.0 << "%\n";
+		//	x = log10(size) / log10(2);
+			//codeLen = (x >(int)x) ? x + 1 : x;
+		//	BT1 = codeLen * text.length();
+		//	cout << "B(T) not compressed = " << BT1 << endl;
+		//	cout << "B(T) compressed = " << BT2 << endl;
+		//	cout << "Huffman saving % = " << (double)(BT1 - BT2) / BT1*100.0 << "%\n";
 
-			//	binaryCode = tree->encode(kidud, text);
-			//	cout << binaryCode << endl;
-			//	outfile.open(outputname);
-			//	if (outfile.is_open())
-			//	{
-			//		outfile << binaryCode << endl;
-			//		outfile.close();
-			//	}
-			//	else
-			//		cout << "Unable to open file";
-			//	break;
-			//case 2:
-			//	cout << "Enter an encoded file" << endl;
-			//	cin >> inputname;
-			//	cout << "Enter a name for decoded file" << endl;
-			//	cin >> outputname;
+		//	binaryCode = tree->encode(kidud, text);
+		//	cout << binaryCode << endl;
+		//	outfile.open(outputname);
+		//	if (outfile.is_open())
+		//	{
+		//		outfile << binaryCode << endl;
+		//		outfile.close();
+		//	}
+		//	else
+		//		cout << "Unable to open file";
+		//	break;
+		//case 2:
+		//	cout << "Enter an encoded file" << endl;
+		//	cin >> inputname;
+		//	cout << "Enter a name for decoded file" << endl;
+		//	cin >> outputname;
 
-			//	inFile.open(inputname);//open the input file
-			//	if (!inFile.good())
-			//	{
-			//		cout << "Cannot open file\n"; break;
-			//	}
-			//	inFile >> binaryCode;
-			//	inFile.close();
-			//	string text = tree->decode(binaryCode);
-			//	cout << "The encoded text is: " << binaryCode << endl;
-			//	cout << "The decoded text is: " << text << endl;
-			//	outfile.open(outputname);
-			//	if (outfile.is_open())
-			//	{
-			//		outfile << text << endl;
-			//		outfile.close();
-			//	}
-			//	else cout << "Unable to open file";
+		//	inFile.open(inputname);//open the input file
+		//	if (!inFile.good())
+		//	{
+		//		cout << "Cannot open file\n"; break;
+		//	}
+		//	inFile >> binaryCode;
+		//	inFile.close();
+		//	string text = tree->decode(binaryCode);
+		//	cout << "The encoded text is: " << binaryCode << endl;
+		//	cout << "The decoded text is: " << text << endl;
+		//	outfile.open(outputname);
+		//	if (outfile.is_open())
+		//	{
+		//		outfile << text << endl;
+		//		outfile.close();
+		//	}
+		//	else cout << "Unable to open file";
 
 		}
 	} while (choice != 3);
