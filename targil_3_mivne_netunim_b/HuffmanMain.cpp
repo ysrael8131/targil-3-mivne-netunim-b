@@ -75,12 +75,12 @@ int main()
 		//	else
 		//		cout << "Unable to open file";
 		//	break;
-		//case 2:
-		//	cout << "Enter an encoded file" << endl;
-		//	cin >> inputname;
-		//	cout << "Enter a name for decoded file" << endl;
-		//	cin >> outputname;
-
+		case 2:
+			cout << "Enter an encoded file" << endl;
+			cin >> inputname;
+			cout << "Enter a name for decoded file" << endl;
+			cin >> outputname;
+			tree->decode(inputname, outputname);
 		//	inFile.open(inputname);//open the input file
 		//	if (!inFile.good())
 		//	{
