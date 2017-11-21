@@ -7,6 +7,10 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	stringstream strStream;
 	ifstream inFile;
 	string str;
+	string treeStruct = "";
+	string chars = "";
+	double x;
+	int codLen;
 	inFile.open(sourceFileName);//open the input file
 	if (!inFile.good())
 	{
@@ -14,17 +18,12 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 		return;
 	}
 	strStream << inFile.rdbuf();
+	inFile.close();
 	str = strStream.str();
 	freqTable = buildFrequencyTable(str);
-	buildTree(freqTable);
-
-	string treeStruct = "";
-	string chars = "";
+	buildTree(freqTable);	
 	codTable = buildCodedTabe(treeStruct, chars);
-	cout << str << endl;
-	cout << "Huffman code:" << endl;
-	
-	
+	cout << "Huffman code:" << endl;	
 	for (int i = 0; i < 256; i++)
 	{
 		if (codTable[i] != "")
@@ -36,18 +35,12 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 			}
 		}
 	}
-	double x;
-	int codLen;
 	x = log2(chars.size());
 	codLen = (x >(int)x) ? x + 1 : x;
-	cout << "In the fixed - length code, the number of bits needed per character: " << codLen << endl;
-	
+	cout << "In the fixed - length code, the number of bits needed per character: " << codLen << endl;	
 	cout << "Encoding in fixed-length code requires " <<codLen*str.size() << " bits." << endl;
-
-	cout << "Encoding in Huffman code requires " <<str.size()  << " bits." << endl;
-	
-	cout << "The encoded string is:" << endl;
-	
+	cout << "Encoding in Huffman code requires " <<str.size()  << " bits." << endl;	
+	cout << "The encoded string is:" << endl;	
 	ofstream outFile;
 	outFile.open(destFileName);
 	if (!outFile.good())
@@ -110,7 +103,6 @@ string* HuffmanTree::buildCodedTabe(string & treeStruct, string & chars)
 	{
 		table[i] = "";
 	}
-
 	codec(root, "", table, treeStruct, chars);
 	treeStruct += "1";
 	return table;
