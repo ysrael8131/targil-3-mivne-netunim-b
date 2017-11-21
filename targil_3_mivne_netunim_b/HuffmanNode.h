@@ -18,6 +18,7 @@ public:
 	HuffmanNode(char s = {}, int f = 0, HuffmanNode*r = nullptr, HuffmanNode*l = nullptr) :str(s), frequency(f) { Right = nullptr; Left = nullptr; }
 	int getFrequency() { return this->frequency; }
 	char getStr() { return this->str; }
+	void setStr(char s) { str = s; }
 	HuffmanNode*getpointerR() { return Right; }
 	HuffmanNode*getpointerL() { return Left; }
 	void setpointerR(HuffmanNode* r) { Right = r; }

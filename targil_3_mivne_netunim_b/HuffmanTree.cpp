@@ -1,5 +1,6 @@
 #include "HuffmanTree.h"
-//gfsnhndsghj
+
+
 void HuffmanTree::encode(string sourceFileName, string destFileName)
 {
 	int * freqTable;
@@ -15,6 +16,7 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	}
 	strStream << inFile.rdbuf();
 	str = strStream.str();
+
 	freqTable = buildFrequencyTable(str);
 	buildTree(freqTable);
 	codTable = buildCodedTabe();
@@ -68,24 +70,96 @@ string* HuffmanTree::buildCodedTabe()
 	{
 		table[i] = "";
 	}
-	codec(root,"", table);
+	codec(root, "", table);
 	return table;
 }
 
 void HuffmanTree::codec(HuffmanNode* Node, string a, string* & table)
 {
-	if (a==""&&Node->getpointerR()==nullptr)
+	if (a == ""&&Node->getpointerR() == nullptr)
 	{
 		table[(int)Node->getStr() - 1] = "0";
 		return;
 	}
-	if (Node->getpointerR()==nullptr)
+	if (Node->getpointerR() == nullptr)
 	{
 		table[(int)Node->getStr() - 1] = a;
-		cout << (int)Node->getStr() - 1<<"	"<< table[(int)Node->getStr() - 1] << endl;
+		cout << (int)Node->getStr() - 1 << "	" << table[(int)Node->getStr() - 1] << endl;
 		return;
 	}
 	codec(Node->getpointerL(), a += "0", table);
 	codec(Node->getpointerR(), a += "1", table);
 }
+void HuffmanTree::decode(string sourceFileName, string destFileName)
+{
+	ifstream inFile;
+	string str[4];
+	int i = 0;
+	inFile.open(sourceFileName);//open the input file
+	if (!inFile.good())
+	{
+		cout << "Cannot open file\n";
+		return;
+	}
+	while (!inFile.eof())
+	{
+		inFile >> str[i];
+		i++;
+	}
+	buildTree(4, str[1], str[2]);
+	
+}
+void HuffmanTree::buildTree(int n, string letters, string tree)
+{
+	
+	
+	
+	root = new HuffmanNode();
+	HuffmanNode* p = root;
+	HuffmanNode* t = root;
+	for (int i = 0; i < tree.length(); i++)
+	{
+		if (tree.at(i) == '0')
+		{
+			p->setpointerL(new HuffmanNode());
+			p->setpointerR(new HuffmanNode());
+			t = p;
+			p = t->getpointerL();
 
+		}
+		if (tree.at(i) =='1')
+		{
+			p = t->getpointerR();
+		}
+	}
+	
+	buildTree(root, letters);
+	
+	
+}
+void HuffmanTree::buildTree(HuffmanNode* root, string &a)
+{
+	
+	if (root== NULL)
+		return;
+	buildTree(root->getpointerL(), a);
+	if (!root->getpointerL() && !root->getpointerR())
+	{
+		root->setStr(a.front());
+		a.erase(0, 1);
+		
+	}
+	buildTree(root->getpointerR(), a);
+	
+}
+void HuffmanTree::print(HuffmanNode* root)
+{
+	if (root == NULL)
+		return;
+	print(root->getpointerL());
+	if (!root->getpointerL() && !root->getpointerR())
+	{
+		cout << root->getStr() << " ";
+	}
+	print(root->getpointerR());
+}
