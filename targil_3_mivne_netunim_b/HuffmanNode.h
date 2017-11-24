@@ -25,7 +25,7 @@ public:
 	void setpointerR(HuffmanNode* r) { Right = r; }
 	void setpointerL(HuffmanNode* l) { Left = l; }
 	void setFrequency(int freq) { frequency = freq; }
-	~HuffmanNode();
+	//~HuffmanNode();
 };
 
 class compareNode

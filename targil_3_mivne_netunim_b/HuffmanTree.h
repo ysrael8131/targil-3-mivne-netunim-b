@@ -12,13 +12,14 @@ public:
 	}
 	~HuffmanTree()
 	{
-		delete root;
+		delete_tree(root);
 	}
 	void encode(string sourceFileName, string destFileName);
 	void decode(string sourceFileName, string destFileName);
 	int* buildFrequencyTable(string text);
 	void buildTree(string letters, string tree);
 	void buildTree(int * frequencyTable);
+	void delete_tree(HuffmanNode*);
 	string * buildCodedTabe(string & treeStruct, string & chars);
 	//void encode(char letter, string * codedTable);
 	//void deleteTree();

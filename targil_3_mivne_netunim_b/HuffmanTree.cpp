@@ -55,7 +55,8 @@ void HuffmanTree::encode(string sourceFileName, string destFileName)
 	cout << treeStruct << endl;
 	cout << str << endl;
 	outFile.close();
-	root = NULL;
+	delete_tree(root);
+	
 }
 
 int* HuffmanTree::buildFrequencyTable(string text)
@@ -173,6 +174,15 @@ void HuffmanTree::decode(string sourceFileName, string destFileName)
 	}
 
 }
+void HuffmanTree::delete_tree(HuffmanNode* root)
+{
+	if (root == NULL)
+		return;
+	delete_tree(root->getpointerL());
+	delete_tree(root->getpointerR());
+	if (root->getpointerL() == NULL&&root->getpointerR() == NULL)
+		delete root;
+}
 void HuffmanTree::buildTree(string letters, string tree)
 {
 	stack<HuffmanNode*> temp;
@@ -201,7 +211,8 @@ void HuffmanTree::buildTree(string letters, string tree)
 			}
 		}
 	}
-
+	
 }
+
 
 

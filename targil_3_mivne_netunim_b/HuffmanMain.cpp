@@ -36,6 +36,7 @@ int main()
 			cout << "Enter a name for output file" << endl;
 			cin >> outputname;
 			tree->encode(inputname, outputname);
+			
 			break;
 		//	cout << text << endl;
 
