@@ -169,6 +169,7 @@ void HuffmanTree::decode(string sourceFileName, string destFileName)
 				outFile << (char)(i + 1);
 				str[4] = "";
 				break;
+
 			}
 		}
 	}
