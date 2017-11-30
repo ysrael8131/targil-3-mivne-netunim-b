@@ -1,3 +1,8 @@
+/*
+Targil 3
+isreal rechtshaffer 301790283
+raz zorno 36786960
+*/
 #pragma once
 #include <fstream>
 #include"HuffmanNode.h"

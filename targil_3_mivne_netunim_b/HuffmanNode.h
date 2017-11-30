@@ -1,3 +1,8 @@
+/*
+Targil 3
+isreal rechtshaffer 301790283
+raz zorno 36786960
+*/
 #pragma once
 #include<iostream>
 #include<string>
@@ -7,6 +12,7 @@
 #include<queue>
 #include <cmath>
 using namespace std;
+//class A node in a tree
 class HuffmanNode
 {
 	friend class compareNode;
@@ -25,7 +31,7 @@ public:
 	void setpointerR(HuffmanNode* r) { Right = r; }
 	void setpointerL(HuffmanNode* l) { Left = l; }
 	void setFrequency(int freq) { frequency = freq; }
-	//~HuffmanNode();
+	
 };
 
 class compareNode
